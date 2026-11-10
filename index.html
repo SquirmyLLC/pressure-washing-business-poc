@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brightline Pressure Washing</title>
+  <meta name="description" content="Driveways, house washing, decks and brick, cleaned like new. Free quotes, usually the same day." />
+  <meta name="theme-color" content="#0a1b2e" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3c5 7 9 11.5 9 16.5a9 9 0 0 1-18 0C7 14.5 11 10 16 3z' fill='%232bb3ff'/%3E%3C/svg%3E" />
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" id="nav">
+    <a class="brand" href="#top" aria-label="Brightline Pressure Washing, home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4c6 8.5 11 14 11 20a11 11 0 0 1-22 0c0-6 5-11.5 11-20z" fill="currentColor"/><path d="M15 25.5c.6 3 2.7 4.8 5.6 5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>
+      <span>Brightline<small>Pressure Washing</small></span>
+    </a>
+    <nav aria-label="Main">
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a class="nav-phone" href="tel:+15555550188">(555) 555-0188</a>
+      <a class="btn btn-accent btn-sm" href="#quote">Free quote</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO: the visitor sprays the grime off with their cursor -->
+    <section class="hero" id="top" aria-label="Intro">
+      <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <p class="eyebrow"><span class="dot"></span>Pressure washing &amp; soft washing · Your City</p>
+        <h1 class="hero-title"><span class="line">Years of grime.</span><span class="line accent-text">Gone by lunch.</span></h1>
+        <p class="hero-sub">Driveways, siding, decks and brick, washed back to like-new with hot water and pressure tuned to every surface. Fully insured, and we leave nothing behind but clean.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-accent" href="#quote">Get a free quote</a>
+          <a class="btn btn-ghost" href="#pricing">See pricing</a>
+        </div>
+        <ul class="hero-checks">
+          <li>Same-week appointments</li>
+          <li>Plant &amp; pet-safe cleaners</li>
+          <li>100% satisfaction promise</li>
+        </ul>
+      </div>
+      <div class="hero-meter" aria-live="polite">
+        <span class="hint" id="spray-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l7 16 2.5-6.5L20 11z" fill="currentColor"/></svg><span class="hint-text">Move your cursor to spray</span></span>
+        <span class="meter"><span class="meter-bar"><i id="meter-fill"></i></span><b id="meter-num">0%</b> clean</span>
+        <button class="btn-reset" id="spray-reset" type="button" hidden>Get it dirty again</button>
+      </div>
+    </section>
+
+    <!-- marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Driveways</span><i></i><span>House washing</span><i></i><span>Decks &amp; fences</span><i></i><span>Brick &amp; pavers</span><i></i><span>Roof soft wash</span><i></i><span>Gutters</span><i></i><span>Storefronts</span><i></i>
+        <span>Driveways</span><i></i><span>House washing</span><i></i><span>Decks &amp; fences</span><i></i><span>Brick &amp; pavers</span><i></i><span>Roof soft wash</span><i></i><span>Gutters</span><i></i><span>Storefronts</span><i></i>
+      </div>
+    </div>
+
+    <!-- SCROLL STORY: problem -> wash -> done, the wand sweeps as you scroll -->
+    <section class="story" id="story" aria-label="How a wash works">
+      <div class="story-pin">
+        <div class="story-stage">
+          <img class="story-img story-before" src="/media/brick-before.jpg" alt="Brick wall streaked with black soot and green algae" />
+          <div class="story-after"><img class="story-img" src="/media/brick-after.jpg" alt="The same brick wall after washing, bright and clean" /></div>
+          <div class="story-wand" aria-hidden="true"><span class="wand-spray"></span><span class="wand-line"></span></div>
+          <span class="tag tag-before">Before</span><span class="tag tag-after">After</span>
+        </div>
+        <div class="story-copy">
+          <div class="story-step is-active" data-step="0">
+            <span class="step-num">01 · The problem</span>
+            <h2>Grime doesn't just look bad. It eats your surfaces.</h2>
+            <p>Algae, mildew and soot work into brick, wood and concrete every season. Left alone they stain, rot and make slick, slippery walkways.</p>
+          </div>
+          <div class="story-step" data-step="1">
+            <span class="step-num">02 · The wash</span>
+            <h2>Hot water. The right pressure. Every inch.</h2>
+            <p>We pre-treat, then wash with pressure matched to the surface: high for concrete, a gentle soft wash for siding and roofs.</p>
+            <ul class="story-stats">
+              <li><b>200°F</b><span>hot-water wash</span></li>
+              <li><b>4,000</b><span>PSI on concrete</span></li>
+              <li><b>0</b><span>harsh acids</span></li>
+            </ul>
+          </div>
+          <div class="story-step" data-step="2">
+            <span class="step-num">03 · Done</span>
+            <h2>Like the day it was built.</h2>
+            <p>We rinse everything down, check every corner with you and leave the place spotless. Most homes take a single afternoon.</p>
+            <a class="btn btn-accent" href="#quote">Book my wash</a>
+          </div>
+          <div class="story-progress" aria-hidden="true"><i id="story-bar"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO: grows to full width as you scroll -->
+    <section class="reel" aria-label="Watch it work">
+      <div class="reel-head container">
+        <p class="kicker">Watch it work</p>
+        <h2 class="section-title">One pass. <span class="accent-text">Pure satisfaction.</span></h2>
+      </div>
+      <div class="reel-frame" id="reel-frame">
+        <video id="reel-video" src="/media/wash.mp4" poster="/media/wash.jpg" muted loop playsinline preload="metadata" aria-label="Video of a driveway being pressure washed clean, one stripe at a time"></video>
+        <div class="reel-badge"><b id="reel-sqft">0</b> sq ft cleaned this year</div>
+      </div>
+    </section>
+
+    <!-- RESULTS: drag sliders -->
+    <section class="results container" id="results" aria-labelledby="results-title">
+      <div class="section-head">
+        <p class="kicker">Before &amp; after</p>
+        <h2 class="section-title" id="results-title">See the difference.</h2>
+        <p class="section-sub">Drag the handle to see what one wash does.</p>
+      </div>
+      <div class="ba-tabs" role="tablist" aria-label="Choose a job">
+        <button role="tab" aria-selected="true" data-pair="driveway">Driveway</button>
+        <button role="tab" aria-selected="false" data-pair="siding">House siding</button>
+        <button role="tab" aria-selected="false" data-pair="deck">Deck</button>
+        <button role="tab" aria-selected="false" data-pair="brick">Brick wall</button>
+      </div>
+      <div class="ba" id="ba" style="--pos: 50%">
+        <img class="ba-img" id="ba-before" src="/media/driveway-before.jpg" alt="Before: stained driveway" draggable="false" />
+        <div class="ba-after"><img class="ba-img" id="ba-after" src="/media/driveway-after.jpg" alt="After: clean driveway" draggable="false" /></div>
+        <span class="tag tag-before">Before</span><span class="tag tag-after">After</span>
+        <div class="ba-handle" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Before and after comparison: slide to compare" />
+      </div>
+      <ul class="ba-captions">
+        <li><b>Oil &amp; tyre marks</b><span>Lifted with hot water and degreaser</span></li>
+        <li><b>Black mildew</b><span>Killed at the root, so it stays gone longer</span></li>
+        <li><b>Moss in the joints</b><span>Blasted out and rinsed away</span></li>
+      </ul>
+    </section>
+
+    <!-- SERVICES: hover (or scroll on phones) wipes each card clean -->
+    <section class="services" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">What we clean</p>
+          <h2 class="section-title" id="services-title">Every surface. <span class="accent-text">The right pressure.</span></h2>
+          <p class="section-sub">Hover a card to wash it.</p>
+        </div>
+        <div class="svc-grid">
+          <article class="svc">
+            <div class="svc-media"><img src="/media/driveway-before.jpg" alt="" loading="lazy" /><img class="svc-after" src="/media/driveway-after.jpg" alt="" loading="lazy" /></div>
+            <div class="svc-body"><h3>Driveways &amp; concrete</h3><p>Oil, tyre marks, rust and moss lifted with hot water and a spinning surface cleaner. No stripes.</p><span class="svc-price">from $149</span></div>
+          </article>
+          <article class="svc">
+            <div class="svc-media"><img src="/media/siding-before.jpg" alt="" loading="lazy" /><img class="svc-after" src="/media/siding-after.jpg" alt="" loading="lazy" /></div>
+            <div class="svc-body"><h3>House soft wash</h3><p>Low-pressure wash that kills algae and mildew on vinyl, stucco and painted siding without damage.</p><span class="svc-price">from $299</span></div>
+          </article>
+          <article class="svc">
+            <div class="svc-media"><img src="/media/deck-before.jpg" alt="" loading="lazy" /><img class="svc-after" src="/media/deck-after.jpg" alt="" loading="lazy" /></div>
+            <div class="svc-body"><h3>Decks &amp; fences</h3><p>Grey, weathered wood brought back to its natural color and ready to stain or seal.</p><span class="svc-price">from $199</span></div>
+          </article>
+          <article class="svc">
+            <div class="svc-media"><img src="/media/brick-before.jpg" alt="" loading="lazy" /><img class="svc-after" src="/media/brick-after.jpg" alt="" loading="lazy" /></div>
+            <div class="svc-body"><h3>Brick, stone &amp; pavers</h3><p>Soot, efflorescence and weeds gone, with optional joint sand and sealing to keep it that way.</p><span class="svc-price">from $179</span></div>
+          </article>
+        </div>
+        <ul class="svc-more">
+          <li>Roof soft washing</li><li>Gutter brightening</li><li>Storefronts &amp; HOAs</li><li>Pool decks</li><li>Graffiti removal</li><li>Dumpster pads</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how container" id="how" aria-labelledby="how-title">
+      <div class="section-head">
+        <p class="kicker">How it works</p>
+        <h2 class="section-title" id="how-title">Three steps. <span class="accent-text">Zero effort.</span></h2>
+      </div>
+      <ol class="how-steps">
+        <li><span class="how-n">1</span><h3>Get your quote</h3><p>Send a few details or photos. You'll get a firm price by text, usually the same day.</p></li>
+        <li><span class="how-n">2</span><h3>We show up and wash</h3><p>On time, uniformed and insured. No need to be home for outdoor jobs.</p></li>
+        <li><span class="how-n">3</span><h3>Enjoy the clean</h3><p>We walk the job with you (or text photos) and only finish when you're happy.</p></li>
+      </ol>
+    </section>
+
+    <!-- PRICING CALCULATOR -->
+    <section class="pricing" id="pricing" aria-labelledby="pricing-title">
+      <div class="container pricing-grid">
+        <div class="section-head">
+          <p class="kicker">Instant estimate</p>
+          <h2 class="section-title" id="pricing-title">Build your wash.</h2>
+          <p class="section-sub">Pick what needs cleaning and the price updates instantly.</p>
+          <ul class="price-promise">
+            <li>No hidden fees, ever</li>
+            <li>Bundle 2+ services and save 15%</li>
+            <li>Price locked when you book</li>
+          </ul>
+        </div>
+        <form class="calc" id="calc" onsubmit="return false">
+          <fieldset>
+            <legend>What should we wash?</legend>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="svc" value="driveway" checked /><span>Driveway</span></label>
+              <label class="chip"><input type="checkbox" name="svc" value="house" /><span>House wash</span></label>
+              <label class="chip"><input type="checkbox" name="svc" value="deck" /><span>Deck / fence</span></label>
+              <label class="chip"><input type="checkbox" name="svc" value="patio" /><span>Patio / pavers</span></label>
+              <label class="chip"><input type="checkbox" name="svc" value="roof" /><span>Roof</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>How big is the property? <output id="size-out">Medium</output></legend>
+            <input type="range" id="size" min="0" max="3" step="1" value="1" aria-label="Property size" />
+            <div class="range-labels" aria-hidden="true"><span>Small</span><span>Medium</span><span>Large</span><span>XL</span></div>
+          </fieldset>
+          <fieldset>
+            <legend>How dirty is it?</legend>
+            <div class="seg">
+              <label><input type="radio" name="cond" value="1" /><span>A little dull</span></label>
+              <label><input type="radio" name="cond" value="1.15" checked /><span>Pretty grimy</span></label>
+              <label><input type="radio" name="cond" value="1.3" /><span>Never been washed</span></label>
+            </div>
+          </fieldset>
+          <div class="calc-total">
+            <div><span class="calc-label">Estimated total</span><b class="calc-price">$<span id="price">0</span></b><span class="calc-note" id="price-note">One service</span></div>
+            <a class="btn btn-accent" href="#quote" id="calc-book">Lock in this price</a>
+          </div>
+          <p class="fine">Sample pricing for this demo. Final price is confirmed after a quick look.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="reviews" id="reviews" aria-labelledby="reviews-title">
+      <div class="container section-head">
+        <p class="kicker">Reviews</p>
+        <h2 class="section-title" id="reviews-title">Neighbors who <span class="accent-text">can't stop staring.</span></h2>
+        <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span> 5.0 average from 300+ jobs</p>
+      </div>
+      <div class="rev-rail">
+        <div class="rev-track">
+          <figure class="rev"><blockquote>"I honestly forgot our driveway was this color. My neighbor booked them the next day."</blockquote><figcaption><span class="av">JM</span>Jenna M. · Oak Hill</figcaption></figure>
+          <figure class="rev"><blockquote>"The north side of the house was green. Now it looks freshly painted. On time and super friendly."</blockquote><figcaption><span class="av">RT</span>Rob T. · Riverside</figcaption></figure>
+          <figure class="rev"><blockquote>"Our deck went from grey and slippery to looking brand new. Worth every penny."</blockquote><figcaption><span class="av">AL</span>Amanda L. · Westbrook</figcaption></figure>
+          <figure class="rev"><blockquote>"Texted photos, got a price in an hour, done that Saturday. Easiest home project ever."</blockquote><figcaption><span class="av">DK</span>Devin K. · Maple Grove</figcaption></figure>
+          <figure class="rev"><blockquote>"They cleaned our storefront and sidewalk before opening. Customers noticed right away."</blockquote><figcaption><span class="av">SP</span>Sofia P. · Downtown</figcaption></figure>
+        </div>
+      </div>
+      <p class="container fine">Sample reviews for this demo.</p>
+    </section>
+
+    <!-- AREA + FAQ -->
+    <section class="area-faq container" id="faq">
+      <div class="area">
+        <p class="kicker">Service area</p>
+        <h2 class="section-title">Serving the whole metro.</h2>
+        <ul class="towns">
+          <li>Oak Hill</li><li>Riverside</li><li>Westbrook</li><li>Maple Grove</li><li>Downtown</li><li>Cedar Park</li><li>Lakeview</li><li>Fairmont</li><li>Brookside</li><li>Pine Ridge</li><li>Hillcrest</li><li>Elm Valley</li>
+        </ul>
+        <a class="btn btn-ghost-dark" href="#quote">Check my address</a>
+      </div>
+      <div class="faq">
+        <p class="kicker">FAQ</p>
+        <h2 class="section-title">Questions, answered.</h2>
+        <details><summary>Will pressure washing damage my siding or roof?</summary><p>No. Siding and roofs get a low-pressure soft wash with cleaners that do the work. High pressure is only used on concrete and stone.</p></details>
+        <details><summary>Do I need to be home?</summary><p>Not for outdoor jobs. We just need access to an outdoor water spigot, and we text before and after photos.</p></details>
+        <details><summary>Are your cleaners safe for plants and pets?</summary><p>Yes. We use biodegradable cleaners and pre-wet and rinse your plants. Pets should stay inside until surfaces dry.</p></details>
+        <details><summary>How long does it take?</summary><p>Most driveways take 1 to 2 hours and a full house wash takes half a day.</p></details>
+        <details><summary>How often should I get it done?</summary><p>Once a year keeps most homes looking sharp. Shady, damp sides may need it every 6 months.</p></details>
+        <details><summary>Are you insured?</summary><p>Fully licensed and insured, with proof sent on request before any job.</p></details>
+      </div>
+    </section>
+
+    <!-- QUOTE FORM -->
+    <section class="quote" id="quote" aria-labelledby="quote-title">
+      <div class="container quote-grid">
+        <div>
+          <p class="kicker">Free quote</p>
+          <h2 class="section-title" id="quote-title">Get your free quote.</h2>
+          <p class="section-sub">Tell us what needs a wash. We'll text you a firm price, usually the same day.</p>
+          <a class="quote-phone" href="tel:+15555550188">(555) 555-0188</a>
+          <p class="hours">Mon to Sat, 7am to 6pm</p>
+        </div>
+        <form class="quote-form" id="quote-form" novalidate>
+          <div class="field"><label for="q-name">Name</label><input id="q-name" name="name" autocomplete="name" required /></div>
+          <div class="field"><label for="q-phone">Phone</label><input id="q-phone" name="phone" type="tel" autocomplete="tel" required /></div>
+          <div class="field full"><label for="q-addr">Street address</label><input id="q-addr" name="address" autocomplete="street-address" required /></div>
+          <div class="field full"><label for="q-svc">What needs washing?</label>
+            <select id="q-svc" name="service"><option>Driveway / concrete</option><option>House wash</option><option>Deck / fence</option><option>Patio / pavers</option><option>Roof</option><option>A bit of everything</option></select>
+          </div>
+          <div class="field full"><label for="q-notes">Anything else? <span class="opt">(optional)</span></label><textarea id="q-notes" name="notes" rows="3"></textarea></div>
+          <button class="btn btn-accent full" type="submit">Get my free quote</button>
+          <p class="fine full">Concept demo: this form doesn't send anything yet.</p>
+          <div class="quote-done" hidden>
+            <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="currentColor"/><path d="M14 25l7 7 13-15" stroke="#0a1b2e" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3>Thanks! You're on the list.</h3>
+            <p>In the real site this would text you a quote. For now, it's a demo.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="#top"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4c6 8.5 11 14 11 20a11 11 0 0 1-22 0c0-6 5-11.5 11-20z" fill="currentColor"/></svg><span>Brightline<small>Pressure Washing</small></span></a>
+        <p>Making homes and businesses look new again, one pass at a time.</p>
+      </div>
+      <div><h4>Contact</h4><p><a href="tel:+15555550188">(555) 555-0188</a><br />Mon to Sat, 7am to 6pm</p></div>
+      <div><h4>Explore</h4><p><a href="#services">Services</a><br /><a href="#pricing">Pricing</a><br /><a href="#faq">FAQ</a></p></div>
+    </div>
+    <p class="container fine">Concept demo. Brand, prices, reviews and photos are placeholders.</p>
+  </footer>
+
+  <div class="mobile-bar">
+    <a href="tel:+15555550188" class="btn btn-ghost-dark">Call</a>
+    <a href="#quote" class="btn btn-accent">Free quote</a>
+  </div>
+</body>
+</html>
