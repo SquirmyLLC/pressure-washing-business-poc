@@ -34,29 +34,32 @@
   </header>
 
   <main id="main">
-    <!-- HERO: the visitor sprays the grime off with their cursor -->
+    <!-- HERO: real job footage, blurred copy fills the background -->
     <section class="hero" id="top" aria-label="Intro">
-      <canvas class="hero-canvas" id="hero-canvas" aria-hidden="true"></canvas>
+      <video class="hero-bg" src="/media/hero.mp4" poster="/media/hero.jpg" muted loop playsinline autoplay aria-hidden="true"></video>
       <div class="hero-shade" aria-hidden="true"></div>
-      <div class="hero-inner">
-        <p class="eyebrow"><span class="dot"></span>Pressure washing &amp; soft washing · Your City</p>
-        <h1 class="hero-title"><span class="line">Years of grime.</span><span class="line accent-text">Gone by lunch.</span></h1>
-        <p class="hero-sub">Driveways, siding, decks and brick, washed back to like-new with hot water and pressure tuned to every surface. Fully insured, and we leave nothing behind but clean.</p>
-        <div class="hero-ctas">
-          <a class="btn btn-accent" href="#quote">Get a free quote</a>
-          <a class="btn btn-ghost" href="#pricing">See pricing</a>
+      <div class="hero-grid">
+        <div class="hero-inner">
+          <p class="eyebrow"><span class="dot"></span>Pressure washing &amp; soft washing · Your City</p>
+          <h1 class="hero-title"><span class="line">Years of grime.</span><span class="line accent-text">Gone by lunch.</span></h1>
+          <p class="hero-sub">Driveways, siding, roofs and porches, washed back to like-new with hot water and pressure tuned to every surface. Fully insured, and we leave nothing behind but clean.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-accent" href="#quote">Get a free quote</a>
+            <a class="btn btn-ghost" href="#results">See the results</a>
+          </div>
+          <ul class="hero-checks">
+            <li>Same-week appointments</li>
+            <li>Plant &amp; pet-safe cleaners</li>
+            <li>100% satisfaction promise</li>
+          </ul>
         </div>
-        <ul class="hero-checks">
-          <li>Same-week appointments</li>
-          <li>Plant &amp; pet-safe cleaners</li>
-          <li>100% satisfaction promise</li>
-        </ul>
+        <div class="hero-card">
+          <video src="/media/hero.mp4" poster="/media/hero.jpg" muted loop playsinline autoplay aria-label="Clips of our crew washing a house, a roof, a porch and a driveway"></video>
+          <div class="hero-chip chip-rating"><span class="stars" aria-hidden="true">★★★★★</span><b>5.0</b> from 300+ jobs</div>
+          <div class="hero-chip chip-live"><i></i>Real jobs, real results</div>
+        </div>
       </div>
-      <div class="hero-meter" aria-live="polite">
-        <span class="hint" id="spray-hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l7 16 2.5-6.5L20 11z" fill="currentColor"/></svg><span class="hint-text">Move your cursor to spray</span></span>
-        <span class="meter"><span class="meter-bar"><i id="meter-fill"></i></span><b id="meter-num">0%</b> clean</span>
-        <button class="btn-reset" id="spray-reset" type="button" hidden>Get it dirty again</button>
-      </div>
+      <a class="hero-scroll" href="#story" aria-label="Scroll to see a driveway get washed"><span></span></a>
     </section>
 
     <!-- marquee -->
@@ -67,25 +70,25 @@
       </div>
     </div>
 
-    <!-- SCROLL STORY: problem -> wash -> done, the wand sweeps as you scroll -->
+    <!-- SCROLL STORY: scrolling scrubs through a real driveway wash -->
     <section class="story" id="story" aria-label="How a wash works">
       <div class="story-pin">
         <div class="story-stage">
-          <img class="story-img story-before" src="/media/brick-before.jpg" alt="Brick wall streaked with black soot and green algae" />
-          <div class="story-after"><img class="story-img" src="/media/brick-after.jpg" alt="The same brick wall after washing, bright and clean" /></div>
-          <div class="story-wand" aria-hidden="true"><span class="wand-spray"></span><span class="wand-line"></span></div>
-          <span class="tag tag-before">Before</span><span class="tag tag-after">After</span>
+          <video id="story-video" src="/media/driveway-scrub.mp4" poster="/media/driveway-before.jpg" muted playsinline preload="auto" aria-label="Time-lapse of a stained driveway being pressure washed clean"></video>
+          <span class="tag tag-state" id="story-tag">Before</span>
+          <span class="story-hint" id="story-hint">Scroll to wash it</span>
         </div>
         <div class="story-copy">
+          <div class="story-progress" aria-hidden="true"><i id="story-bar"></i></div>
           <div class="story-step is-active" data-step="0">
             <span class="step-num">01 · The problem</span>
             <h2>Grime doesn't just look bad. It eats your surfaces.</h2>
-            <p>Algae, mildew and soot work into brick, wood and concrete every season. Left alone they stain, rot and make slick, slippery walkways.</p>
+            <p>Mildew, algae and dirt soak into concrete every season. Left alone they stain, spread and make slick, slippery walkways.</p>
           </div>
           <div class="story-step" data-step="1">
             <span class="step-num">02 · The wash</span>
             <h2>Hot water. The right pressure. Every inch.</h2>
-            <p>We pre-treat, then wash with pressure matched to the surface: high for concrete, a gentle soft wash for siding and roofs.</p>
+            <p>A spinning surface cleaner lifts years of buildup without stripes, then we detail the edges and rinse it all away.</p>
             <ul class="story-stats">
               <li><b>200°F</b><span>hot-water wash</span></li>
               <li><b>4,000</b><span>PSI on concrete</span></li>
@@ -94,82 +97,101 @@
           </div>
           <div class="story-step" data-step="2">
             <span class="step-num">03 · Done</span>
-            <h2>Like the day it was built.</h2>
-            <p>We rinse everything down, check every corner with you and leave the place spotless. Most homes take a single afternoon.</p>
+            <h2>Like the day it was poured.</h2>
+            <p>This whole driveway took one morning. We rinse down, check every corner with you and leave the place spotless.</p>
             <a class="btn btn-accent" href="#quote">Book my wash</a>
           </div>
-          <div class="story-progress" aria-hidden="true"><i id="story-bar"></i></div>
         </div>
       </div>
     </section>
 
-    <!-- VIDEO: grows to full width as you scroll -->
+    <!-- REELS: short clips that play as they scroll into view -->
     <section class="reel" aria-label="Watch it work">
       <div class="reel-head container">
         <p class="kicker">Watch it work</p>
         <h2 class="section-title">One pass. <span class="accent-text">Pure satisfaction.</span></h2>
-      </div>
-      <div class="reel-frame" id="reel-frame">
-        <video id="reel-video" src="/media/wash.mp4" poster="/media/wash.jpg" muted loop playsinline preload="metadata" aria-label="Video of a driveway being pressure washed clean, one stripe at a time"></video>
         <div class="reel-badge"><b id="reel-sqft">0</b> sq ft cleaned this year</div>
+      </div>
+      <div class="reels container">
+        <figure class="reel-card">
+          <video src="/media/reel-patio.mp4" poster="/media/reel-patio.jpg" muted loop playsinline preload="none" aria-label="Washing a covered patio floor"></video>
+          <figcaption><b>Covered patios</b><span>Hot water lifts the grime</span></figcaption>
+        </figure>
+        <figure class="reel-card">
+          <video src="/media/reel-driveway.mp4" poster="/media/reel-driveway.jpg" muted loop playsinline preload="none" aria-label="Time-lapse of a driveway being cleaned with a surface cleaner"></video>
+          <figcaption><b>Driveways</b><span>Stripe-free surface cleaning</span></figcaption>
+        </figure>
+        <figure class="reel-card">
+          <video src="/media/reel-aerial.mp4" poster="/media/reel-aerial.jpg" muted loop playsinline preload="none" aria-label="Aerial view of a large home after a full exterior wash"></video>
+          <figcaption><b>Whole-home washes</b><span>Roof to driveway in a day</span></figcaption>
+        </figure>
       </div>
     </section>
 
-    <!-- RESULTS: drag sliders -->
+    <!-- RESULTS: real before/after from the same camera, two ways to see it -->
     <section class="results container" id="results" aria-labelledby="results-title">
       <div class="section-head">
         <p class="kicker">Before &amp; after</p>
         <h2 class="section-title" id="results-title">See the difference.</h2>
-        <p class="section-sub">Drag the handle to see what one wash does.</p>
+        <p class="section-sub">Same driveway, same camera, one morning apart. Drag the slider, or grab the wand and wash it yourself.</p>
       </div>
-      <div class="ba-tabs" role="tablist" aria-label="Choose a job">
-        <button role="tab" aria-selected="true" data-pair="driveway">Driveway</button>
-        <button role="tab" aria-selected="false" data-pair="siding">House siding</button>
-        <button role="tab" aria-selected="false" data-pair="deck">Deck</button>
-        <button role="tab" aria-selected="false" data-pair="brick">Brick wall</button>
-      </div>
-      <div class="ba" id="ba" style="--pos: 50%">
-        <img class="ba-img" id="ba-before" src="/media/driveway-before.jpg" alt="Before: stained driveway" draggable="false" />
-        <div class="ba-after"><img class="ba-img" id="ba-after" src="/media/driveway-after.jpg" alt="After: clean driveway" draggable="false" /></div>
-        <span class="tag tag-before">Before</span><span class="tag tag-after">After</span>
-        <div class="ba-handle" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-        <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Before and after comparison: slide to compare" />
+      <div class="results-grid">
+        <div class="result-card">
+          <div class="ba" id="ba" style="--pos: 50%">
+            <img class="ba-img" src="/media/driveway-before.jpg" alt="Before: stained, mildewed driveway" draggable="false" />
+            <div class="ba-after"><img class="ba-img" src="/media/driveway-after.jpg" alt="After: the same driveway, clean" draggable="false" /></div>
+            <span class="tag tag-before">Before</span><span class="tag tag-after">After</span>
+            <div class="ba-handle" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Before and after comparison: slide to compare" />
+          </div>
+          <p class="result-label"><b>Drag to compare</b><span>Grab the yellow handle</span></p>
+        </div>
+        <div class="result-card">
+          <div class="spray-box">
+            <canvas class="spray-canvas" id="spray-canvas" aria-label="Interactive: move over the driveway to pressure wash it"></canvas>
+            <div class="spray-ui" aria-live="polite">
+              <span class="meter"><span class="meter-bar"><i id="meter-fill"></i></span><b id="meter-num">0%</b> clean</span>
+              <button class="btn-reset" id="spray-reset" type="button" hidden>Reset</button>
+            </div>
+          </div>
+          <p class="result-label"><b id="spray-hint">Wash it yourself</b><span class="hint-text">Move your cursor over the driveway</span></p>
+        </div>
       </div>
       <ul class="ba-captions">
-        <li><b>Oil &amp; tyre marks</b><span>Lifted with hot water and degreaser</span></li>
         <li><b>Black mildew</b><span>Killed at the root, so it stays gone longer</span></li>
-        <li><b>Moss in the joints</b><span>Blasted out and rinsed away</span></li>
+        <li><b>Dirt &amp; tyre marks</b><span>Lifted with hot water and a surface cleaner</span></li>
+        <li><b>Joints &amp; edges</b><span>Detailed by hand, then rinsed away</span></li>
       </ul>
     </section>
 
-    <!-- SERVICES: hover (or scroll on phones) wipes each card clean -->
+    <!-- SERVICES: each card plays its clip on hover (or when in view on phones) -->
     <section class="services" id="services" aria-labelledby="services-title">
       <div class="container">
         <div class="section-head">
           <p class="kicker">What we clean</p>
           <h2 class="section-title" id="services-title">Every surface. <span class="accent-text">The right pressure.</span></h2>
-          <p class="section-sub">Hover a card to wash it.</p>
+          <p class="section-sub">Hover a card to see us work.</p>
         </div>
         <div class="svc-grid">
           <article class="svc">
-            <div class="svc-media"><img src="/media/driveway-before.jpg" alt="" loading="lazy" /><img class="svc-after" src="/media/driveway-after.jpg" alt="" loading="lazy" /></div>
-            <div class="svc-body"><h3>Driveways &amp; concrete</h3><p>Oil, tyre marks, rust and moss lifted with hot water and a spinning surface cleaner. No stripes.</p><span class="svc-price">from $149</span></div>
+            <div class="svc-media"><video muted loop playsinline preload="none" poster="/media/card-driveway.jpg" src="/media/card-driveway.mp4" aria-hidden="true"></video><span class="svc-play" aria-hidden="true"></span></div>
+            <div class="svc-body"><h3>Driveways &amp; concrete</h3><p>Oil, tyre marks, mildew and moss lifted with hot water and a spinning surface cleaner. No stripes.</p><span class="svc-price">from $149</span></div>
           </article>
           <article class="svc">
-            <div class="svc-media"><img src="/media/siding-before.jpg" alt="" loading="lazy" /><img class="svc-after" src="/media/siding-after.jpg" alt="" loading="lazy" /></div>
-            <div class="svc-body"><h3>House soft wash</h3><p>Low-pressure wash that kills algae and mildew on vinyl, stucco and painted siding without damage.</p><span class="svc-price">from $299</span></div>
+            <div class="svc-media"><video muted loop playsinline preload="none" poster="/media/card-house.jpg" src="/media/card-house.mp4" aria-hidden="true"></video><span class="svc-play" aria-hidden="true"></span></div>
+            <div class="svc-body"><h3>House soft wash</h3><p>Low-pressure wash that kills algae and mildew on siding, trim and windows without damage.</p><span class="svc-price">from $299</span></div>
           </article>
           <article class="svc">
-            <div class="svc-media"><img src="/media/deck-before.jpg" alt="" loading="lazy" /><img class="svc-after" src="/media/deck-after.jpg" alt="" loading="lazy" /></div>
-            <div class="svc-body"><h3>Decks &amp; fences</h3><p>Grey, weathered wood brought back to its natural color and ready to stain or seal.</p><span class="svc-price">from $199</span></div>
+            <div class="svc-media"><video muted loop playsinline preload="none" poster="/media/card-roof.jpg" src="/media/card-roof.mp4" aria-hidden="true"></video><span class="svc-play" aria-hidden="true"></span></div>
+            <div class="svc-body"><h3>Roof soft wash</h3><p>Black streaks and moss gone, safely, with no high pressure on your shingles.</p><span class="svc-price">from $449</span></div>
           </article>
           <article class="svc">
-            <div class="svc-media"><img src="/media/brick-before.jpg" alt="" loading="lazy" /><img class="svc-after" src="/media/brick-after.jpg" alt="" loading="lazy" /></div>
-            <div class="svc-body"><h3>Brick, stone &amp; pavers</h3><p>Soot, efflorescence and weeds gone, with optional joint sand and sealing to keep it that way.</p><span class="svc-price">from $179</span></div>
+            <div class="svc-media"><video muted loop playsinline preload="none" poster="/media/card-porch.jpg" src="/media/card-porch.mp4" aria-hidden="true"></video><span class="svc-play" aria-hidden="true"></span></div>
+            <div class="svc-body"><h3>Porches &amp; outdoor living</h3><p>Ceilings, columns, decks and patios washed top to bottom, ready for company.</p><span class="svc-price">from $199</span></div>
           </article>
         </div>
         <ul class="svc-more">
-          <li>Roof soft washing</li><li>Gutter brightening</li><li>Storefronts &amp; HOAs</li><li>Pool decks</li><li>Graffiti removal</li><li>Dumpster pads</li>
+          <li>Brick &amp; pavers</li><li>Gutter brightening</li><li>Decks &amp; fences</li><li>Storefronts &amp; HOAs</li><li>Pool decks</li><li>Graffiti removal</li>
         </ul>
       </div>
     </section>
@@ -313,7 +335,7 @@
       <div><h4>Contact</h4><p><a href="tel:+15555550188">(555) 555-0188</a><br />Mon to Sat, 7am to 6pm</p></div>
       <div><h4>Explore</h4><p><a href="#services">Services</a><br /><a href="#pricing">Pricing</a><br /><a href="#faq">FAQ</a></p></div>
     </div>
-    <p class="container fine">Concept demo. Brand, prices, reviews and photos are placeholders.</p>
+    <p class="container fine">Concept demo. Brand, prices and reviews are placeholders, and the footage is sample content.</p>
   </footer>
 
   <div class="mobile-bar">

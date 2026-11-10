@@ -13,20 +13,21 @@ npm run build    # static site in dist/ (works from any folder or static host)
 
 ## What's interactive
 
-- **Spray-to-clean hero**: the visitor's cursor (or finger) blasts grime off a driveway; cleaned spots look wet and dry off. When idle, an automatic wand washes it in stripes and the grime fades back so it loops. (`src/spray.js`)
-- **Scroll story**: a pinned section where scrolling sweeps a wash line across a brick wall through three steps: problem, wash, done.
-- **Video reel**: a wash clip that grows to full width as you scroll, with a counting stat.
-- **Before/after slider**: drag (or arrow keys) across four jobs, with a hint animation when it scrolls into view.
-- **Service cards**: hover wipes each card clean from the cursor position (on phones, cards wash as you scroll).
+- **Video hero**: a montage of real jobs in a tilted card, with a blurred copy filling the background (full-bleed on phones).
+- **Scroll story**: a pinned section where scrolling scrubs through a real driveway time-lapse, through three steps: problem, wash, done.
+- **Reels**: three short vertical clips that play as they scroll into view, with a counting stat.
+- **Before/after**: a drag slider and a "wash it yourself" spray canvas (`src/spray.js`), both using real frames from the same static camera.
+- **Service cards**: each card plays its clip on hover (on phones, as it scrolls into view).
 - **Instant price calculator**, FAQ, and a front-end-only quote form.
 
 ## Media
 
-Everything in `public/media` is generated placeholder art: pixel-aligned `*-before.jpg` / `*-after.jpg` pairs and `wash.mp4`.
-To use real job photos, replace each pair with same-named files (1600×1000 works well; before and after should be shot from the same spot).
-To regenerate the placeholders: `npm run media` (needs Playwright's Chromium and ffmpeg).
+`public/media` is cut from two sample phone videos with `tools/edit-videos.sh` (trimmed, cropped to remove watermarks and end screens, color-graded, audio removed).
+**They are other companies' social posts, so replace them with the client's own footage (or get permission) before showing this as a client's site.**
+To re-cut from new footage, adjust the timestamps in the script and run `tools/edit-videos.sh <driveway.mp4> <montage.mp4>` (needs ffmpeg).
+v1 (procedurally generated placeholder art) is tagged `v1`.
 
 ## Not done yet
 
-- Real brand, photos, video, prices, service area and reviews.
+- Real brand, footage, prices, service area and reviews.
 - The quote form doesn't send anywhere yet (hook up email/SMS or a CRM before launch).

@@ -43,71 +43,82 @@ function onScroll() {
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
-/* ---------- hero: spray to clean ---------- */
-const fill = $('#meter-fill'), num = $('#meter-num'), resetBtn = $('#spray-reset'), hint = $('#spray-hint');
-if (matchMedia('(hover: none)').matches) $('.hint-text').textContent = 'Swipe to spray';
-initSpray($('#hero-canvas'), {
-  before: media('driveway-before.jpg'),
-  after: media('driveway-after.jpg'),
-  reduced,
-  onProgress(p) {
-    const pct = Math.round(p * 100);
-    fill.style.width = pct + '%'; num.textContent = pct + '%';
-    resetBtn.hidden = pct < 60;
-  },
-}).then((spray) => {
-  resetBtn.addEventListener('click', () => spray.reset());
-  $('#hero-canvas').addEventListener('pointermove', () => hint.classList.add('is-gone'), { once: true });
-});
-
-if (!reduced) {
+/* ---------- hero ---------- */
+// the background and the card play the same clip; keep them in step
+const heroVids = $$('.hero video');
+if (reduced) heroVids.forEach((v) => { v.removeAttribute('autoplay'); v.pause(); });
+else {
+  heroVids.forEach((v) => v.play().catch(() => {}));
+  setInterval(() => { const [bg, card] = heroVids; if (card && !card.paused && Math.abs(bg.currentTime - card.currentTime) > 0.15) bg.currentTime = card.currentTime; }, 2000);
   gsap.from('.hero-inner > *', { y: 40, opacity: 0, duration: 1, stagger: 0.08, ease: 'power3.out', delay: 0.1 });
-  gsap.from('.hero-meter', { y: 20, opacity: 0, duration: 0.8, delay: 0.8, ease: 'power3.out' });
+  gsap.from('.hero-card', { y: 60, rotate: 8, opacity: 0, duration: 1.2, ease: 'power3.out', delay: 0.25 });
+  gsap.from('.hero-chip', { scale: 0.6, opacity: 0, duration: 0.7, stagger: 0.15, ease: 'back.out(2)', delay: 0.9 });
+  gsap.to('.hero-card', { yPercent: -12, rotate: -1, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 }
 
-/* ---------- scroll story ---------- */
+/* ---------- scroll story: scroll scrubs the driveway time-lapse ---------- */
 const steps = $$('.story-step');
-const storyBar = $('#story-bar');
+const storyBar = $('#story-bar'), storyVid = $('#story-video'), storyTag = $('#story-tag'), storyHint = $('#story-hint');
 function setStep(i) { steps.forEach((s, k) => s.classList.toggle('is-active', k === i)); }
 if (!reduced) {
-  const after = $('.story-after'), wand = $('.story-wand'), before = $('.story-before');
-  const st = { p: 0 };
-  const render = () => {
-    const p = st.p;
-    // 0-0.22 problem (zoom into grime), 0.22-0.8 wand sweeps, 0.8-1 done
-    const sweep = gsap.utils.clamp(0, 1, (p - 0.22) / 0.58);
-    after.style.clipPath = `inset(0 ${100 - sweep * 100}% 0 0)`;
-    wand.style.left = sweep * 100 + '%';
-    wand.style.opacity = sweep > 0 && sweep < 1 ? 1 : 0;
-    const zoom = 1 + 0.12 * (1 - gsap.utils.clamp(0, 1, p / 0.22)) * gsap.utils.clamp(0, 1, p / 0.05 + 0.6);
-    before.style.transform = after.firstElementChild.style.transform = `scale(${zoom})`;
-    storyBar.style.width = p * 100 + '%';
-    setStep(p < 0.22 ? 0 : p < 0.82 ? 1 : 2);
+  let target = 0, seeking = false;
+  const seek = () => {
+    if (!storyVid.duration) return;
+    const t = Math.min(storyVid.duration - 0.05, target * storyVid.duration);
+    if (Math.abs(storyVid.currentTime - t) < 0.02) { seeking = false; return; }
+    seeking = true; storyVid.currentTime = t;
   };
+  storyVid.addEventListener('seeked', () => { seeking = false; if (Math.abs(storyVid.currentTime - target * storyVid.duration) > 0.04) seek(); });
+  storyVid.addEventListener('loadedmetadata', seek);
+  // Load the whole clip into memory before scrubbing: seeking then works on any host,
+  // even ones that don't support byte-range requests.
+  const scrubSrc = storyVid.getAttribute('src');
+  storyVid.removeAttribute('src'); storyVid.load();
+  let loading = false;
+  const loadScrub = () => {
+    if (loading) return; loading = true;
+    fetch(scrubSrc).then((r) => r.blob()).then((b) => { storyVid.src = URL.createObjectURL(b); })
+      .catch(() => { storyVid.src = scrubSrc; });
+  };
+  new IntersectionObserver(([e]) => { if (e.isIntersecting) loadScrub(); }, { rootMargin: '150% 0px' }).observe(storyVid);
+  // iOS only seeks a video after it has been played once
+  const unlock = () => { storyVid.play().then(() => { storyVid.pause(); seek(); }).catch(() => {}); };
+  window.addEventListener('touchstart', unlock, { once: true, passive: true });
   ScrollTrigger.create({
-    trigger: '.story', start: 'top top', end: () => '+=' + innerHeight * 2.4,
-    pin: '.story-pin', scrub: 0.6,
-    onUpdate: (self) => { gsap.to(st, { p: self.progress, duration: 0.25, overwrite: true, onUpdate: render }); },
+    trigger: '.story', start: 'top top', end: () => '+=' + innerHeight * 2.6,
+    pin: '.story-pin', scrub: true,
+    onUpdate: (self) => {
+      const p = self.progress;
+      // hold the dirty frame for the first bit so the "problem" step reads, then wash
+      target = gsap.utils.clamp(0, 1, (p - 0.12) / 0.8);
+      if (!seeking) seek();
+      storyBar.style.width = p * 100 + '%';
+      setStep(p < 0.2 ? 0 : p < 0.85 ? 1 : 2);
+      const clean = target > 0.97;
+      storyTag.textContent = clean ? 'After' : target > 0.02 ? 'Washing…' : 'Before';
+      storyTag.classList.toggle('is-clean', clean);
+      storyHint.classList.toggle('is-gone', p > 0.05);
+    },
   });
-  render();
 } else {
   document.documentElement.classList.add('no-motion');
+  storyVid.poster = media('driveway-after.jpg');
+  storyTag.textContent = 'After'; storyHint.hidden = true;
   steps.forEach((s) => { s.classList.add('is-active'); s.style.position = 'static'; s.style.marginBottom = '40px'; });
 }
 
-/* ---------- video reel ---------- */
-const video = $('#reel-video');
-new IntersectionObserver(([e]) => { if (e.isIntersecting) video.play().catch(() => {}); else video.pause(); }, { threshold: 0.2 }).observe(video);
+/* ---------- reels: play while on screen ---------- */
+const playInView = (v, threshold = 0.35) => new IntersectionObserver(([e]) => {
+  if (e.isIntersecting && !reduced) v.play().catch(() => {}); else v.pause();
+}, { threshold }).observe(v);
+$$('.reel-card video').forEach((v) => playInView(v));
 if (!reduced) {
-  const mobile = matchMedia('(max-width: 760px)').matches;
-  gsap.fromTo('#reel-frame', { clipPath: mobile ? 'inset(4% 4% round 20px)' : 'inset(6% 10% round 28px)' }, {
-    clipPath: 'inset(0% 0% round 0px)', ease: 'none',
-    scrollTrigger: { trigger: '#reel-frame', start: 'top 85%', end: 'center 50%', scrub: true },
-  });
+  gsap.from('.reel-card', { y: 120, opacity: 0, duration: 1.1, stagger: 0.15, ease: 'power3.out', scrollTrigger: { trigger: '.reels', start: 'top 85%', once: true } });
+  gsap.to('.reel-card:nth-child(2)', { y: -60, ease: 'none', scrollTrigger: { trigger: '.reels', start: 'top bottom', end: 'bottom top', scrub: true } });
 }
 const sqft = $('#reel-sqft'), target = 1284500;
 ScrollTrigger.create({
-  trigger: '#reel-frame', start: 'top 60%', once: true,
+  trigger: '.reels', start: 'top 75%', once: true,
   onEnter: () => gsap.to({ v: 0 }, { v: target, duration: reduced ? 0 : 2.2, ease: 'power2.out', onUpdate() { sqft.textContent = Math.round(this.targets()[0].v).toLocaleString(); } }),
 });
 
@@ -148,32 +159,31 @@ ScrollTrigger.create({
   },
 });
 
-const labels = { driveway: ['stained driveway', 'clean driveway'], siding: ['green, algae-streaked siding', 'bright clean siding'], deck: ['grey, mildewed deck', 'restored wood deck'], brick: ['soot-streaked brick wall', 'clean brick wall'] };
-$$('.ba-tabs button').forEach((btn) => btn.addEventListener('click', () => {
-  $$('.ba-tabs button').forEach((b) => b.setAttribute('aria-selected', b === btn));
-  const k = btn.dataset.pair, b = $('#ba-before'), a = $('#ba-after');
-  b.style.opacity = a.style.opacity = 0;
-  setTimeout(() => {
-    b.src = media(`${k}-before.jpg`); a.src = media(`${k}-after.jpg`);
-    b.alt = 'Before: ' + labels[k][0]; a.alt = 'After: ' + labels[k][1];
-    Promise.all([b.decode(), a.decode()]).catch(() => {}).then(() => { b.style.opacity = a.style.opacity = 1; });
-    if (!reduced) { const o = { v: 15 }; setPos(15); gsap.to(o, { v: 55, duration: 1.1, ease: 'power3.out', onUpdate: () => setPos(o.v) }); }
-  }, 250);
-}));
+/* ---------- wash it yourself ---------- */
+const fill = $('#meter-fill'), num = $('#meter-num'), resetBtn = $('#spray-reset');
+if (matchMedia('(hover: none)').matches) $('.result-card .hint-text').textContent = 'Swipe across the driveway';
+let sprayStarted = false;
+ScrollTrigger.create({
+  trigger: '#spray-canvas', start: 'top bottom', once: true,
+  onEnter: () => {
+    if (sprayStarted) return; sprayStarted = true;
+    initSpray($('#spray-canvas'), {
+      before: media('driveway-before.jpg'), after: media('driveway-after.jpg'), reduced,
+      onProgress(p) { const pct = Math.round(p * 100); fill.style.width = pct + '%'; num.textContent = pct + '%'; resetBtn.hidden = pct < 50; },
+    }).then((spray) => resetBtn.addEventListener('click', () => spray.reset()));
+  },
+});
 
-/* ---------- service cards: wipe clean from the cursor ---------- */
+/* ---------- service cards: play the clip on hover ---------- */
 const canHover = matchMedia('(hover: hover)').matches;
 $$('.svc').forEach((card) => {
-  const m = $('.svc-media', card);
-  const at = (e) => { const r = m.getBoundingClientRect(); m.style.setProperty('--x', ((e.clientX - r.left) / r.width) * 100 + '%'); m.style.setProperty('--y', ((e.clientY - r.top) / r.height) * 100 + '%'); };
-  if (canHover) {
-    card.addEventListener('pointerenter', (e) => { at(e); card.classList.add('is-clean'); });
-    card.addEventListener('pointerleave', (e) => { at(e); card.classList.remove('is-clean'); });
-  } else {
-    ScrollTrigger.create({ trigger: card, start: 'top 55%', end: 'bottom 20%', toggleClass: 'is-clean' });
-  }
+  const v = $('video', card);
+  const play = () => { if (reduced) return; card.classList.add('is-playing'); v.play().catch(() => {}); };
+  const stop = () => { card.classList.remove('is-playing'); v.pause(); };
+  if (canHover) { card.addEventListener('pointerenter', play); card.addEventListener('pointerleave', stop); }
+  else ScrollTrigger.create({ trigger: card, start: 'top 70%', end: 'bottom 30%', onToggle: (self) => (self.isActive ? play() : stop()) });
 });
-if (!canHover) $('#services .section-sub').textContent = 'Scroll to wash each one.';
+if (!canHover) $('#services .section-sub').textContent = 'Scroll to see us work.';
 
 /* ---------- pricing calculator ---------- */
 const BASE = { driveway: 149, house: 299, deck: 199, patio: 179, roof: 449 };
